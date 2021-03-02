@@ -6,25 +6,28 @@ import com.pedroluis.fastshoptest.infrastructure.Api
 import com.pedroluis.fastshoptest.infrastructure.ApiResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class CatalogRepository(private val api: Api) {
     suspend fun getMoviesRepo(): ApiResult<CatalogResponse> {
-        val response = api.getMovies(
-            api_key = BuildConfig.API_KEY,
-            adult = false,
-            genres = "",
-            language = "pt-BR",
-            page = 1,
-            sortBy = "popularity.asc",
-            video = false
-        )
-        response.body()?.let {
-            withContext(Dispatchers.IO) {  }
-        }
-        return if (response.isSuccessful) {
-            ApiResult.Success(response.body() as CatalogResponse)
-        } else {
-            ApiResult.Error(null, response.message())
+        val response: Response<CatalogResponse>
+        return try {
+            response = api.getMovies(
+                    api_key = BuildConfig.API_KEY,
+                    adult = false,
+                    genres = "10749",
+                    language = "pt-BR",
+                    page = 1,
+                    sortBy = "popularity.asc",
+                    video = false
+            )
+            if (response.isSuccessful) {
+                ApiResult.Success(response.body() as CatalogResponse)
+            } else {
+                ApiResult.Error(null, response.message())
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e, e.message)
         }
     }
 }
