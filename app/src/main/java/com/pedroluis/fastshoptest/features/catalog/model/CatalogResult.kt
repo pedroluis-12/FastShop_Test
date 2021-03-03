@@ -7,7 +7,7 @@ data class CatalogResult(
     @SerializedName("adult")
     val resultAdult: Boolean,
     @SerializedName("backdrop_path")
-    val resultBackdropPath: String,
+    val resultBackdropPath: String?,
     @SerializedName("genre_ids")
     val resultGenreIds: List<Int>,
     @SerializedName("id")
@@ -21,7 +21,7 @@ data class CatalogResult(
     @SerializedName("popularity")
     val resultPopularity: BigDecimal,
     @SerializedName("poster_path")
-    val resultPosterPath: String,
+    val resultPosterPath: String?,
     @SerializedName("release_date")
     val resultReleaseDate: String,
     @SerializedName("title")

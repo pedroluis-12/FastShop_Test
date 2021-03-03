@@ -8,6 +8,5 @@ val apiModule = module {
     fun provideApi(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
     }
-    single { provideApi(get()) }
-
+    single { provideApi(retrofit = get()) }
 }

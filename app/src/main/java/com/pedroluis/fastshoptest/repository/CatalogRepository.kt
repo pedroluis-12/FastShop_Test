@@ -9,14 +9,14 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class CatalogRepository(private val api: Api) {
-    suspend fun getMoviesRepo(): ApiResult<CatalogResponse> {
+    suspend fun getMovies(): ApiResult<CatalogResponse> {
         val response: Response<CatalogResponse>
         return try {
             response = api.getMovies(
                     api_key = BuildConfig.API_KEY,
                     adult = false,
-                    genres = "10749",
-                    language = "pt-BR",
+                    genres = "28,12",
+                    language = "en-US",
                     page = 1,
                     sortBy = "popularity.asc",
                     video = false

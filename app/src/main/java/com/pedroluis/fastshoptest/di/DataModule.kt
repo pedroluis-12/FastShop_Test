@@ -34,7 +34,6 @@ val dataModule = module {
                 .baseUrl(BuildConfig.BASE_URL)
                 .build()
     }
-
     single { provideHttpClient() }
-    single { provideRetrofit(get()) }
+    single { provideRetrofit(client = get()) }
 }

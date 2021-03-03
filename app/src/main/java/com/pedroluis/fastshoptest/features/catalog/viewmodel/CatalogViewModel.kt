@@ -19,11 +19,10 @@ class CatalogViewModel(private val repository : CatalogRepository) : ViewModel()
         catalogState.value = CatalogViewState.ShowLoading(true)
         viewModelScope.launch {
             try {
-                val result = repository.getMoviesRepo()
-                when (result) {
+                when (val result = repository.getMovies()) {
                     is ApiResult.Success -> {
                         catalogState.value =
-                            CatalogViewState.Success(result.resultSuccess.catalogResults)
+                            CatalogViewState.Success(result.resultSuccess)
                         Timber.tag("success")
                             .d(result.resultSuccess.catalogTotalResults.toString())
                     }
