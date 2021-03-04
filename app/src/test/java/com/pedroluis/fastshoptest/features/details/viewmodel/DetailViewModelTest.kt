@@ -1,23 +1,40 @@
 package com.pedroluis.fastshoptest.features.details.viewmodel
 
+import android.os.Looper
+import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.lifecycle.Observer
 import com.pedroluis.fastshoptest.features.details.model.DetailResponse
 import com.pedroluis.fastshoptest.features.details.repository.DetailRepository
 import com.pedroluis.fastshoptest.features.details.viewmodel.state.DetailViewState
 import com.pedroluis.fastshoptest.features.utils.test
 import com.pedroluis.fastshoptest.infrastructure.ApiResult
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.mockkStatic
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 import java.math.BigDecimal
 
-@RunWith(MockitoJUnitRunner::class)
 class DetailViewModelTest {
-    @Mock
+    @MockK
     private lateinit var detailLiveDataObserver: Observer<DetailViewState>
     private lateinit var viewModel: DetailViewModel
+    private val mockLooper = mockk<Looper>()
+    private val mockExecutor = mockk<ArchTaskExecutor>()
+
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this, relaxUnitFun = true)
+        mockkStatic("android.os.Looper")
+        mockkStatic("android.arch.core.executor.ArchTaskExecutor")
+        every { Looper.getMainLooper() } returns mockLooper
+        every { mockLooper.thread } returns Thread()
+        every { ArchTaskExecutor.getInstance() } returns mockExecutor
+        every { mockExecutor.isMainThread } returns true
+    }
 
     @Test
     fun test_detail_viewModel() = test {
@@ -52,7 +69,7 @@ class DetailViewModelTest {
             )
 
             val repository = MockDetailRepository(result = result as DetailResponse)
-            val viewModel = DetailViewModel(repository)
+            viewModel = DetailViewModel(repository)
             viewModel.detailViewState.observeForever(detailLiveDataObserver)
         }
 

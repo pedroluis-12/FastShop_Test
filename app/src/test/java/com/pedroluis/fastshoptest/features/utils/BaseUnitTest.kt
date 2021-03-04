@@ -20,7 +20,6 @@ class Test {
         }
     }
 
-
     fun assert(block: suspend () -> Unit) {
         apply {
             runBlocking {

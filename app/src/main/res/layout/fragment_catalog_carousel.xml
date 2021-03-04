@@ -40,4 +40,9 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" />
 
+    <include
+        android:id="@+id/information"
+        layout="@layout/view_loading"
+        android:visibility="gone"/>
+
 </LinearLayout>

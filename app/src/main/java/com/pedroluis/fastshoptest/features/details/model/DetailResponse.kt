@@ -47,7 +47,7 @@ data class DetailResponse(
     @SerializedName("tagline")
     val detailTagline: String?,
     @SerializedName("title")
-    val detailTitle: String,
+    val detailTitle: String?,
     @SerializedName("video")
     val detailVideo: Boolean,
     @SerializedName("vote_average")

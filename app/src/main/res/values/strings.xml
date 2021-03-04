@@ -8,5 +8,9 @@
     <string name="title_comedian_value">35</string>
     <string name="title_documentary">Documentário</string>
     <string name="title_documentary_value">99</string>
+    <string name="empty_message">Informações indisponíveis</string>
+    <string name="loading_message">Carregando os filmes…</string>
+    <string name="empty_message_list">"Não foi possível carregar os filmes…"</string>
+    <string name="empty_title">Título indisponível</string>
 
 </resources>

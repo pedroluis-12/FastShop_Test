@@ -38,6 +38,14 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setupViews(detailResponse: DetailResponse) {
+        if (detailResponse.detailTitle.isNullOrEmpty() ||
+            detailResponse.detailOverview.isNullOrEmpty() ||
+            detailResponse.detailGenres.isNullOrEmpty()) {
+            Toast.makeText(this, getString(R.string.empty_message),
+                Toast.LENGTH_LONG).show()
+            finish()
+        }
+
         detailPoster.loadImage(detailResponse.detailPosterPath)
         detailTitle.text = detailResponse.detailTitle
         detailDescription.text = detailResponse.detailOverview
@@ -62,7 +70,9 @@ class DetailActivity : AppCompatActivity() {
                     }
                     is DetailViewState.Error -> {
                         Timber.tag("error").i(it.message)
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, getString(R.string.empty_message),
+                            Toast.LENGTH_LONG).show()
+                        finish()
                     }
                 }
             }
