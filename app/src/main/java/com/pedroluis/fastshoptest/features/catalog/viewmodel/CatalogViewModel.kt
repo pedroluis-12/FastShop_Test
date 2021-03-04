@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pedroluis.fastshoptest.features.catalog.viewmodel.state.CatalogViewState
 import com.pedroluis.fastshoptest.infrastructure.ApiResult
-import com.pedroluis.fastshoptest.repository.CatalogRepository
+import com.pedroluis.fastshoptest.features.catalog.repository.CatalogRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -15,11 +15,11 @@ class CatalogViewModel(private val repository : CatalogRepository) : ViewModel()
     private val catalogState: MutableLiveData<CatalogViewState> = MutableLiveData()
     val catalogViewState: LiveData<CatalogViewState> = catalogState
 
-    fun fetchMovies() {
+    fun fetchMovies(genres: String) {
         catalogState.value = CatalogViewState.ShowLoading(true)
         viewModelScope.launch {
             try {
-                when (val result = repository.getMovies()) {
+                when (val result = repository.getMovies(genres)) {
                     is ApiResult.Success -> {
                         catalogState.value =
                             CatalogViewState.Success(result.resultSuccess)

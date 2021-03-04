@@ -2,4 +2,11 @@
     <string name="app_name">FastShop Test</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="detail_genre_title">Gêneros:</string>
+    <string name="title_action_adventure">Filmes de Ação e Aventura</string>
+    <string name="title_action_value">28,12</string>
+    <string name="title_comedian">Filmes de Comédia</string>
+    <string name="title_comedian_value">35</string>
+    <string name="title_documentary">Documentário</string>
+    <string name="title_documentary_value">99</string>
+
 </resources>

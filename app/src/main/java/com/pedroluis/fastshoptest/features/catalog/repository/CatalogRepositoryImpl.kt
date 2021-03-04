@@ -1,21 +1,21 @@
-package com.pedroluis.fastshoptest.repository
+package com.pedroluis.fastshoptest.features.catalog.repository
 
 import com.pedroluis.fastshoptest.BuildConfig
 import com.pedroluis.fastshoptest.features.catalog.model.CatalogResponse
+import com.pedroluis.fastshoptest.features.catalog.repository.CatalogRepository
 import com.pedroluis.fastshoptest.infrastructure.Api
 import com.pedroluis.fastshoptest.infrastructure.ApiResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class CatalogRepository(private val api: Api) {
-    suspend fun getMovies(): ApiResult<CatalogResponse> {
+class CatalogRepositoryImpl(private val api: Api):
+    CatalogRepository {
+    override suspend fun getMovies(genres: String): ApiResult<CatalogResponse> {
         val response: Response<CatalogResponse>
         return try {
             response = api.getMovies(
                     api_key = BuildConfig.API_KEY,
                     adult = false,
-                    genres = "28,12",
+                    genres = genres,
                     language = "en-US",
                     page = 1,
                     sortBy = "popularity.asc",

@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pedroluis.fastshoptest.features.details.repository.DetailRepository
 import com.pedroluis.fastshoptest.features.details.viewmodel.state.DetailViewState
 import com.pedroluis.fastshoptest.infrastructure.ApiResult
-import com.pedroluis.fastshoptest.repository.DetailRepository
+import com.pedroluis.fastshoptest.features.details.repository.DetailRepositoryImpl
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
